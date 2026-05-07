@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aapas – Skills & Resource Exchange</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #1a7a5e;
+  --green-light: #e8f5f0;
+  --green-mid: #2a9d78;
+  --green-dark: #0f4f3c;
+  --amber: #d47c2a;
+  --amber-light: #fdf3e3;
+  --cream: #faf8f4;
+  --cream-dark: #f0ece4;
+  --text: #1a1a18;
+  --text-muted: #6b6860;
+  --text-light: #9a968f;
+  --border: #e2ddd6;
+  --white: #ffffff;
+  --red: #c0392b;
+  --red-light: #fdf0ef;
+  --blue: #2563a8;
+  --blue-light: #eff4fc;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 16px rgba(26,26,24,0.08);
+  --shadow-lg: 0 8px 40px rgba(26,26,24,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── PAGES ─────────────────────────────── */
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ── NAV ─────────────────────────────── */
+nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+  padding: 0 2rem;
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; gap: 2rem;
+  height: 64px;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--green-dark);
+  cursor: pointer; text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+}
+.nav-logo .dot { color: var(--amber); }
+.nav-links { display: flex; gap: 0.25rem; flex: 1; }
+.nav-link {
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 0.875rem; font-weight: 500;
+  color: var(--text-muted); cursor: pointer;
+  border: none; background: none; transition: all 0.2s;
+}
+.nav-link:hover { background: var(--cream); color: var(--text); }
+.nav-link.active { background: var(--green-light); color: var(--green-dark); }
+.nav-actions { display: flex; gap: 8px; align-items: center; }
+.btn-sm {
+  padding: 7px 16px; border-radius: 20px;
+  font-size: 0.875rem; font-weight: 500;
+  cursor: pointer; border: none; transition: all 0.2s;
+}
+.btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-muted); }
+.btn-outline:hover { border-color: var(--green); color: var(--green); }
+.btn-primary { background: var(--green); color: white; }
+.btn-primary:hover { background: var(--green-dark); }
+
+/* ── BUTTONS ─────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; border-radius: var(--radius-sm);
+  font-size: 0.95rem; font-weight: 500;
+  cursor: pointer; border: none; transition: all 0.2s;
+  text-decoration: none; font-family: 'DM Sans', sans-serif;
+}
+.btn-green { background: var(--green); color: white; }
+.btn-green:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(26,122,94,0.3); }
+.btn-amber { background: var(--amber); color: white; }
+.btn-amber:hover { background: #b8692a; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(212,124,42,0.3); }
+.btn-ghost { background: transparent; color: var(--green); border: 1.5px solid var(--green); }
+.btn-ghost:hover { background: var(--green-light); }
+.btn-red { background: var(--red); color: white; }
+.btn-red:hover { background: #a93226; }
+.btn-gray { background: var(--cream-dark); color: var(--text-muted); }
+.btn-gray:hover { background: var(--border); }
+.btn-lg { padding: 16px 32px; font-size: 1.05rem; border-radius: var(--radius); }
+
+/* ── CONTAINER ─────────────────────────────── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.container-sm { max-width: 800px; margin: 0 auto; padding: 0 2rem; }
+
+/* ── SECTION ─────────────────────────────── */
+.section { padding: 4rem 0; }
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 700;
+  color: var(--text); margin-bottom: 0.5rem;
+}
+.section-header p { color: var(--text-muted); font-size: 1rem; }
+
+/* ── CARDS ─────────────────────────────── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.2s;
+}
+.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+
+/* ── LISTING CARD ─────────────────────────────── */
+.listing-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+.listing-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); border-color: var(--green); }
+.listing-card .type-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 600; margin-bottom: 0.75rem;
+}
+.type-offer { background: var(--green-light); color: var(--green-dark); }
+.type-request { background: var(--amber-light); color: #8b4d1a; }
+.listing-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text); }
+.listing-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem; }
+.listing-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cat-tag {
+  padding: 3px 10px; border-radius: 20px; font-size: 0.75rem;
+  background: var(--cream-dark); color: var(--text-muted); font-weight: 500;
+}
+.member-mini { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+.avatar-xs {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem; font-weight: 600; color: white;
+}
+.member-mini span { font-size: 0.8rem; color: var(--text-muted); }
+
+/* ── GRID ─────────────────────────────── */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 1.5rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+
+/* ── FORMS ─────────────────────────────── */
+.form-group { margin-bottom: 1.25rem; }
+.form-group label {
+  display: block; font-size: 0.875rem; font-weight: 500;
+  margin-bottom: 0.4rem; color: var(--text);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; padding: 10px 14px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+  background: var(--white); color: var(--text);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(26,122,94,0.1); }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* ── BADGE ─────────────────────────────── */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 0.72rem; font-weight: 600;
+}
+.badge-auto { background: var(--green-light); color: var(--green-dark); }
+.badge-manual { background: var(--blue-light); color: #1a4a8a; }
+.badge-verified { background: #f0e8ff; color: #5b21b6; }
+
+/* ── TABS ─────────────────────────────── */
+.tab-bar { display: flex; gap: 4px; background: var(--cream-dark); padding: 4px; border-radius: var(--radius-sm); width: fit-content; margin-bottom: 1.5rem; }
+.tab-btn {
+  padding: 8px 20px; border-radius: 6px; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; background: transparent; color: var(--text-muted);
+}
+.tab-btn.active { background: var(--white); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+
+/* ── FILTER BAR ─────────────────────────────── */
+.filter-bar {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 2rem; align-items: center;
+}
+.filter-btn {
+  padding: 7px 16px; border-radius: 20px; font-size: 0.85rem;
+  border: 1.5px solid var(--border); background: var(--white);
+  cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 500;
+  color: var(--text-muted); transition: all 0.2s;
+}
+.filter-btn.active { border-color: var(--green); background: var(--green-light); color: var(--green-dark); }
+.filter-btn:hover { border-color: var(--green); color: var(--green); }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap input {
+  width: 100%; padding: 9px 14px 9px 38px;
+  border: 1.5px solid var(--border); border-radius: 20px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none;
+  background: var(--white); transition: border-color 0.2s;
+}
+.search-wrap input:focus { border-color: var(--green); }
+.search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 1rem; }
+
+/* ── ALERT ─────────────────────────────── */
+.alert {
+  padding: 12px 16px; border-radius: var(--radius-sm);
+  font-size: 0.875rem; margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 8px;
+}
+.alert-success { background: var(--green-light); color: var(--green-dark); border-left: 4px solid var(--green); }
+.alert-warn { background: var(--amber-light); color: #7a4a1a; border-left: 4px solid var(--amber); }
+.alert-info { background: var(--blue-light); color: #1a4a8a; border-left: 4px solid var(--blue); }
+.alert-red { background: var(--red-light); color: var(--red); border-left: 4px solid var(--red); }
+
+/* ── MODAL ─────────────────────────────── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(26,26,24,0.5); z-index: 200;
+  align-items: center; justify-content: center; padding: 1rem;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--white); border-radius: var(--radius);
+  padding: 2rem; max-width: 520px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: modalIn 0.25s ease;
+}
+@keyframes modalIn { from { opacity: 0; transform: translateY(16px) scale(0.97); } to { opacity: 1; transform: none; } }
+.modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+.modal-header h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; }
+.modal-close { background: var(--cream-dark); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
+
+/* ── STAT CARD ─────────────────────────────── */
+.stat-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.5rem;
+  text-align: center;
+}
+.stat-card .stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem; font-weight: 700; color: var(--green);
+  margin-bottom: 0.25rem;
+}
+.stat-card .stat-label { font-size: 0.85rem; color: var(--text-muted); }
+
+/* ── AVATAR ─────────────────────────────── */
+.avatar {
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-weight: 600; color: white; flex-shrink: 0;
+}
+.avatar-sm { width: 36px; height: 36px; font-size: 0.85rem; }
+.avatar-md { width: 48px; height: 48px; font-size: 1rem; }
+.avatar-lg { width: 72px; height: 72px; font-size: 1.4rem; }
+.avatar-xl { width: 96px; height: 96px; font-size: 1.8rem; }
+
+/* ── DIVIDER ─────────────────────────────── */
+.divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+/* ── PROFILE PAGE ─────────────────────────────── */
+.profile-header {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+  padding: 3rem 0 2rem; margin-bottom: -3rem;
+}
+.profile-card { position: relative; z-index: 1; }
+.badges-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ── EXCHANGE STATUS ─────────────────────────────── */
+.status-pill {
+  padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+}
+.status-active { background: var(--green-light); color: var(--green-dark); }
+.status-pending { background: var(--amber-light); color: #8b4d1a; }
+.status-completed { background: var(--cream-dark); color: var(--text-muted); }
+.status-paused { background: var(--blue-light); color: #1a4a8a; }
+
+/* ── TOAST ─────────────────────────────── */
+.toast {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 300;
+  background: var(--text); color: white;
+  padding: 12px 20px; border-radius: var(--radius-sm);
+  font-size: 0.875rem; box-shadow: var(--shadow-lg);
+  transform: translateY(80px); opacity: 0;
+  transition: all 0.3s; pointer-events: none; max-width: 320px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { background: var(--green-dark); }
+.toast.error { background: var(--red); }
+
+/* ── FOOTER ─────────────────────────────── */
+footer {
+  background: var(--green-dark); color: #a8d4c4;
+  padding: 3rem 0 1.5rem; margin-top: 4rem;
+}
+footer h4 { font-family: 'Playfair Display', serif; color: white; margin-bottom: 1rem; }
+footer p { font-size: 0.85rem; line-height: 1.8; }
+footer a { color: #a8d4c4; text-decoration: none; display: block; margin-bottom: 4px; font-size: 0.85rem; transition: color 0.2s; cursor: pointer; }
+footer a:hover { color: white; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem; padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.8rem; color: #7aab99; }
+.no-money-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; margin-top: 1rem;
+}
+
+/* ── HERO ─────────────────────────────── */
+.hero {
+  background: var(--green-dark);
+  padding: 6rem 0 5rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+}
+.hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 14px; border-radius: 20px; color: #c8f0e2;
+  font-size: 0.85rem; font-weight: 500; margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700;
+  color: white; line-height: 1.2; margin-bottom: 1.25rem;
+  max-width: 700px;
+}
+.hero h1 .accent { color: #6dd5a8; }
+.hero p { color: #a8d4c4; font-size: 1.1rem; max-width: 550px; margin-bottom: 2.5rem; line-height: 1.7; }
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-stats {
+  display: flex; gap: 3rem; margin-top: 4rem;
+  flex-wrap: wrap;
+}
+.hero-stat { color: white; }
+.hero-stat .num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; display: block; }
+.hero-stat .lbl { font-size: 0.85rem; color: #7aab99; }
+
+/* ── HOW IT WORKS ─────────────────────────────── */
+.how-step {
+  display: flex; gap: 1.5rem; align-items: flex-start;
+}
+.step-num-circle {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--green-light); color: var(--green-dark);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1.1rem; flex-shrink: 0;
+}
+
+/* ── NO MONEY BANNER ─────────────────────────────── */
+.no-money-banner {
+  background: var(--amber-light); border: 1.5px solid #f0c080;
+  border-radius: var(--radius); padding: 1rem 1.5rem;
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.9rem; color: #7a4a1a; font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+/* ── PAGE HEADER ─────────────────────────────── */
+.page-header {
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 2.5rem 0;
+}
+.page-header h1 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.5rem; }
+.page-header p { color: var(--text-muted); }
+
+/* ── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .grid-3, .grid-2, .grid-4 { grid-template-columns: 1fr; }
+  .hero-stats { gap: 2rem; }
+}
+
+/* ── GUIDELINES ─────────────────────────────── */
+.guideline-section { margin-bottom: 2.5rem; }
+.guideline-section h3 {
+  font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.guideline-list { list-style: none; }
+.guideline-list li {
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+  font-size: 0.9rem; color: var(--text-muted); display: flex; gap: 10px;
+}
+.guideline-list li:last-child { border-bottom: none; }
+.guideline-list li::before { content: '✦'; color: var(--green); flex-shrink: 0; }
+
+/* ── EXCHANGE ITEM ─────────────────────────────── */
+.exchange-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.25rem;
+  display: flex; gap: 1rem; align-items: flex-start;
+  transition: box-shadow 0.2s;
+}
+.exchange-item:hover { box-shadow: var(--shadow); }
+
+/* ── THUMBS ─────────────────────────────── */
+.thumb-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--white);
+  cursor: pointer; font-size: 1.1rem; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.thumb-btn:hover { border-color: var(--green); background: var(--green-light); }
+.thumb-btn.voted { border-color: var(--green); background: var(--green-light); }
+
+/* category colors */
+.cat-repair { background: #fff0e8; color: #8b3a1a; }
+.cat-tutoring { background: #e8f0ff; color: #1a3a8b; }
+.cat-language { background: #f0e8ff; color: #5b1a8b; }
+.cat-tools { background: #e8fff0; color: #1a6b3a; }
+.cat-rides { background: #fff8e8; color: #8b6a1a; }
+.cat-other { background: #f0f0f0; color: #5a5a5a; }
+
+/* toggle type */
+.type-toggle { display: flex; gap: 12px; margin-bottom: 1.5rem; }
+.type-toggle-btn {
+  flex: 1; padding: 14px; border-radius: var(--radius); border: 2px solid var(--border);
+  background: var(--white); cursor: pointer; text-align: center; transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.type-toggle-btn.active-offer { border-color: var(--green); background: var(--green-light); }
+.type-toggle-btn.active-request { border-color: var(--amber); background: var(--amber-light); }
+.type-toggle-btn h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 3px; }
+.type-toggle-btn p { font-size: 0.8rem; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<!-- ══════════ TOAST ══════════ -->
+<div class="toast" id="toast"></div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" onclick="showPage('home')">Aapas<span class="dot">·</span></a>
+    <div class="nav-links">
+      <button class="nav-link" onclick="showPage('offers')">Browse Offers</button>
+      <button class="nav-link" onclick="showPage('requests')">Browse Requests</button>
+      <button class="nav-link" onclick="showPage('post')">Post a Listing</button>
+      <button class="nav-link" onclick="showPage('guidelines')">Guidelines</button>
+    </div>
+    <div class="nav-actions" id="nav-actions">
+      <button class="btn-sm btn-outline" onclick="openModal('login-modal')">Log In</button>
+      <button class="btn-sm btn-primary" onclick="openModal('signup-modal')">Join Free</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ HOME PAGE ══════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">🤝 Community Mutual Aid · No Money Required</div>
+      <h1>Share Skills. <span class="accent">Build Community.</span> Help Each Other.</h1>
+      <p>Aapas is a skill and resource exchange where neighbours help neighbours — offering what they have, getting what they need. No money, no marketplace. Just community.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-lg" style="background:#6dd5a8; color: var(--green-dark); font-weight: 600;" onclick="showPage('post'); setPostType('offer')">🌱 Offer Help</button>
+        <button class="btn btn-lg btn-ghost" style="border-color:#6dd5a8; color:#6dd5a8;" onclick="showPage('post'); setPostType('request')">🙏 Request Help</button>
+        <button class="btn btn-lg" style="background: rgba(255,255,255,0.12); color:white;" onclick="showPage('offers')">Browse Listings</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num" id="stat-members">284</span><span class="lbl">Community Members</span></div>
+        <div class="hero-stat"><span class="num" id="stat-exchanges">1,240</span><span class="lbl">Exchanges Completed</span></div>
+        <div class="hero-stat"><span class="num" id="stat-listings">73</span><span class="lbl">Active Listings</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section" style="background: var(--white);">
+    <div class="container">
+      <div class="section-header">
+        <h2>How Aapas Works</h2>
+        <p>Simple, human, and completely free of charge</p>
+      </div>
+      <div class="grid-3" style="gap: 2rem;">
+        <div class="how-step">
+          <div class="step-num-circle">1</div>
+          <div>
+            <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.4rem;">Sign up as a member</h3>
+            <p style="font-size:0.875rem; color: var(--text-muted);">Create a free profile. Add your neighbourhood, what you can offer, and what you might need someday.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num-circle">2</div>
+          <div>
+            <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.4rem;">Post an offer or request</h3>
+            <p style="font-size:0.875rem; color: var(--text-muted);">Can lend your ladder? Know three languages? Need help moving furniture? Post it — it only takes a minute.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num-circle">3</div>
+          <div>
+            <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.4rem;">Connect & exchange</h3>
+            <p style="font-size:0.875rem; color: var(--text-muted);">Reach out, meet safely, and complete the exchange. Mark it done and earn trust badges as your reputation grows.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED LISTINGS -->
+  <div class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Recent Listings</h2>
+        <p>Fresh offers and requests from your community</p>
+      </div>
+      <div class="grid-3" id="home-listings"></div>
+      <div style="text-align:center; margin-top: 2.5rem; display: flex; gap: 1rem; justify-content: center;">
+        <button class="btn btn-green" onclick="showPage('offers')">Browse All Offers</button>
+        <button class="btn btn-amber" onclick="showPage('requests')">Browse All Requests</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS STRIP -->
+  <div class="section" style="background: var(--cream-dark); padding: 3rem 0;">
+    <div class="container">
+      <div class="grid-4">
+        <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">💰 Money Exchanged</div></div>
+        <div class="stat-card"><div class="stat-num">284</div><div class="stat-label">👥 Members</div></div>
+        <div class="stat-card"><div class="stat-num">1,240</div><div class="stat-label">🤝 Exchanges Done</div></div>
+        <div class="stat-card"><div class="stat-num">97%</div><div class="stat-label">👍 Satisfaction Rate</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ BROWSE OFFERS PAGE ══════════ -->
+<div class="page" id="page-offers">
+  <div class="page-header">
+    <div class="container">
+      <h1>Browse Offers 🌱</h1>
+      <p>Community members sharing their skills and resources</p>
+    </div>
+  </div>
+  <div class="section" style="padding-top: 2rem;">
+    <div class="container">
+      <div class="filter-bar">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search offers..." id="offers-search" oninput="filterListings('offers')">
+        </div>
+        <button class="filter-btn active" onclick="setCatFilter('offers', '', this)">All</button>
+        <button class="filter-btn" onclick="setCatFilter('offers', 'Repair', this)">🔧 Repair</button>
+        <button class="filter-btn" onclick="setCatFilter('offers', 'Tutoring', this)">📚 Tutoring</button>
+        <button class="filter-btn" onclick="setCatFilter('offers', 'Language', this)">🗣️ Language</button>
+        <button class="filter-btn" onclick="setCatFilter('offers', 'Tools', this)">🪚 Tools</button>
+        <button class="filter-btn" onclick="setCatFilter('offers', 'Rides', this)">🚗 Rides</button>
+        <button class="filter-btn" onclick="setCatFilter('offers', 'Other', this)">✨ Other</button>
+      </div>
+      <div class="grid-3" id="offers-grid"></div>
+      <p id="offers-empty" style="display:none; text-align:center; color: var(--text-muted); padding: 3rem 0;">No offers match your search. <button class="btn btn-ghost" onclick="showPage('post'); setPostType('offer')" style="padding:6px 14px; font-size:0.85rem; margin-left:8px;">Post an Offer</button></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ BROWSE REQUESTS PAGE ══════════ -->
+<div class="page" id="page-requests">
+  <div class="page-header">
+    <div class="container">
+      <h1>Browse Requests 🙏</h1>
+      <p>Community members who need a hand — can you help?</p>
+    </div>
+  </div>
+  <div class="section" style="padding-top: 2rem;">
+    <div class="container">
+      <div class="filter-bar">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search requests..." id="requests-search" oninput="filterListings('requests')">
+        </div>
+        <button class="filter-btn active" onclick="setCatFilter('requests', '', this)">All</button>
+        <button class="filter-btn" onclick="setCatFilter('requests', 'Repair', this)">🔧 Repair</button>
+        <button class="filter-btn" onclick="setCatFilter('requests', 'Tutoring', this)">📚 Tutoring</button>
+        <button class="filter-btn" onclick="setCatFilter('requests', 'Language', this)">🗣️ Language</button>
+        <button class="filter-btn" onclick="setCatFilter('requests', 'Tools', this)">🪚 Tools</button>
+        <button class="filter-btn" onclick="setCatFilter('requests', 'Rides', this)">🚗 Rides</button>
+        <button class="filter-btn" onclick="setCatFilter('requests', 'Other', this)">✨ Other</button>
+      </div>
+      <div class="grid-3" id="requests-grid"></div>
+      <p id="requests-empty" style="display:none; text-align:center; color: var(--text-muted); padding: 3rem 0;">No requests match your search. <button class="btn btn-amber" onclick="showPage('post'); setPostType('request')" style="padding:6px 14px; font-size:0.85rem; margin-left:8px;">Post a Request</button></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ POST A LISTING PAGE ══════════ -->
+<div class="page" id="page-post">
+  <div class="page-header">
+    <div class="container">
+      <h1>Post a Listing ✏️</h1>
+      <p>Share something you can offer, or let the community know what you need</p>
+    </div>
+  </div>
+  <div class="section" style="padding-top: 2rem;">
+    <div class="container-sm">
+      <div class="no-money-banner">
+        🚫 <strong>No money exchanges hands on Aapas.</strong> This platform is for skill and resource sharing only.
+      </div>
+      <div id="post-login-prompt" style="display:none;" class="alert alert-info">
+        ℹ️ Please <button onclick="openModal('login-modal')" style="background:none;border:none;color:var(--blue);font-weight:600;cursor:pointer;font-family:inherit;">log in</button> or <button onclick="openModal('signup-modal')" style="background:none;border:none;color:var(--blue);font-weight:600;cursor:pointer;font-family:inherit;">sign up</button> to post a listing.
+      </div>
+      <div id="post-form-wrap">
+        <div class="card">
+          <h3 style="font-size:1rem; font-weight:600; margin-bottom: 1rem; color: var(--text-muted);">What are you posting?</h3>
+          <div class="type-toggle">
+            <div class="type-toggle-btn active-offer" id="toggle-offer" onclick="setPostType('offer')">
+              <h4>🌱 I Want to Offer</h4>
+              <p>Share a skill, tool, or resource</p>
+            </div>
+            <div class="type-toggle-btn" id="toggle-request" onclick="setPostType('request')">
+              <h4>🙏 I Need Something</h4>
+              <p>Post a request for help</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Title *</label>
+            <input type="text" id="post-title" placeholder="e.g. Can tutor O-level Mathematics" maxlength="80">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Category *</label>
+              <select id="post-category">
+                <option value="">Select category...</option>
+                <option value="Repair">🔧 Repair & Handyman</option>
+                <option value="Tutoring">📚 Tutoring & Education</option>
+                <option value="Language">🗣️ Language Practice</option>
+                <option value="Tools">🪚 Tools & Equipment</option>
+                <option value="Rides">🚗 Rides & Errands</option>
+                <option value="Other">✨ Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Neighbourhood / Area</label>
+              <input type="text" id="post-area" placeholder="e.g. DHA Phase 5, Block B">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description *</label>
+            <textarea id="post-desc" rows="4" placeholder="Describe what you're offering or what you need. Be specific — good details help the right person find you."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Availability / Notes</label>
+            <input type="text" id="post-avail" placeholder="e.g. Weekends only, or After 6pm on weekdays">
+          </div>
+          <button class="btn btn-green" style="width:100%;" onclick="submitPost()">Post Listing</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MEMBER PROFILES ══════════ -->
+<div class="page" id="page-profile">
+  <div class="profile-header" id="profile-header-bg"></div>
+  <div class="section" style="padding-top: 1rem;">
+    <div class="container">
+      <div class="card profile-card" style="display:flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start; margin-bottom: 2rem;">
+        <div class="avatar avatar-xl" id="profile-avatar" style="background: var(--green);"></div>
+        <div style="flex: 1; min-width: 200px;">
+          <h1 style="font-family: 'Playfair Display', serif; font-size: 1.8rem;" id="profile-name"></h1>
+          <p style="color: var(--text-muted); margin-bottom: 0.75rem;" id="profile-area"></p>
+          <div class="badges-wrap" id="profile-badges"></div>
+        </div>
+        <div style="display: flex; gap: 1.5rem; text-align: center; flex-wrap: wrap;">
+          <div><div style="font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--green);" id="profile-count">0</div><div style="font-size: 0.8rem; color: var(--text-muted);">Exchanges</div></div>
+          <div><div style="font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--amber);" id="profile-thumbs">0</div><div style="font-size: 0.8rem; color: var(--text-muted);">👍 Received</div></div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div>
+          <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;">🌱 What I Offer</h3>
+          <p id="profile-offers-text" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;"></p>
+          <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">🙏 What I Need</h3>
+          <p id="profile-needs-text" style="color: var(--text-muted); font-size: 0.9rem;"></p>
+        </div>
+        <div>
+          <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;">📋 Their Listings</h3>
+          <div id="profile-listings"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MY DASHBOARD ══════════ -->
+<div class="page" id="page-dashboard">
+  <div class="page-header">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <h1>My Dashboard 📊</h1>
+        <p id="dash-welcome">Welcome back!</p>
+      </div>
+      <button class="btn btn-green" onclick="showPage('post')">+ Post New Listing</button>
+    </div>
+  </div>
+  <div class="section" style="padding-top: 2rem;">
+    <div class="container">
+      <div id="dash-no-login" style="display:none; text-align:center; padding: 4rem 0;">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">👤</div>
+        <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 0.5rem;">Please Log In</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">You need to be signed in to see your dashboard.</p>
+        <button class="btn btn-green" onclick="openModal('login-modal')">Log In</button>
+      </div>
+      <div id="dash-content">
+        <div class="grid-4" style="margin-bottom: 2rem;">
+          <div class="stat-card"><div class="stat-num" id="dash-count">0</div><div class="stat-label">Exchanges Done</div></div>
+          <div class="stat-card"><div class="stat-num" id="dash-thumbs">0</div><div class="stat-label">👍 Received</div></div>
+          <div class="stat-card"><div class="stat-num" id="dash-listings-count">0</div><div class="stat-label">Active Listings</div></div>
+          <div class="stat-card"><div class="stat-num" id="dash-badges-count">0</div><div class="stat-label">Badges Earned</div></div>
+        </div>
+
+        <!-- Badges section -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;">🏅 My Badges</h3>
+          <div class="badges-wrap" id="dash-badges"></div>
+        </div>
+
+        <div class="tab-bar">
+          <button class="tab-btn active" onclick="switchDashTab('listings', this)">My Listings</button>
+          <button class="tab-btn" onclick="switchDashTab('exchanges', this)">My Exchanges</button>
+        </div>
+
+        <div id="dash-tab-listings">
+          <div id="dash-listings-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+        <div id="dash-tab-exchanges" style="display: none;">
+          <div id="dash-exchanges-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ REPORT AN ISSUE ══════════ -->
+<div class="page" id="page-report">
+  <div class="page-header">
+    <div class="container">
+      <h1>Report an Issue 🚩</h1>
+      <p>All reports are reviewed privately by admins — nothing is posted publicly</p>
+    </div>
+  </div>
+  <div class="section" style="padding-top: 2rem;">
+    <div class="container-sm">
+      <div class="alert alert-info" style="margin-bottom: 1.5rem;">
+        🔒 <strong>Your report is private.</strong> Only site admins can see it. We review all reports within 48 hours and may follow up by email.
+      </div>
+      <div class="card">
+        <div id="report-success" style="display:none; text-align:center; padding: 2rem 0;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+          <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 0.5rem;">Report Submitted</h2>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Thank you. Our admin team will review your report within 48 hours.</p>
+          <button class="btn btn-ghost" onclick="showPage('home')">Return Home</button>
+        </div>
+        <div id="report-form">
+          <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-muted);">Tell us what happened</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name *</label>
+              <input type="text" id="report-name" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+              <label>Your Email *</label>
+              <input type="email" id="report-email" placeholder="your@email.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Member Being Reported</label>
+            <input type="text" id="report-member" placeholder="Name or username of the member">
+          </div>
+          <div class="form-group">
+            <label>Exchange or Listing Link/Title</label>
+            <input type="text" id="report-listing" placeholder="What listing or exchange is this about?">
+          </div>
+          <div class="form-group">
+            <label>Issue Type *</label>
+            <select id="report-type">
+              <option value="">Select type...</option>
+              <option value="no-show">Member didn't show up</option>
+              <option value="disrespect">Disrespectful behaviour</option>
+              <option value="money">Attempted to charge money</option>
+              <option value="safety">Safety concern</option>
+              <option value="fake">Fake or misleading listing</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>What Happened? *</label>
+            <textarea id="report-desc" rows="5" placeholder="Please describe the situation in detail. Include dates, what was agreed, and what went wrong."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Date of Incident</label>
+            <input type="date" id="report-date">
+          </div>
+          <button class="btn btn-red" style="width:100%;" onclick="submitReport()">Submit Report</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ GUIDELINES PAGE ══════════ -->
+<div class="page" id="page-guidelines">
+  <div class="page-header">
+    <div class="container">
+      <h1>Community Guidelines 📖</h1>
+      <p>How we keep Aapas safe, respectful, and genuinely useful for everyone</p>
+    </div>
+  </div>
+  <div class="section" style="padding-top: 2rem;">
+    <div class="container-sm">
+      <div class="alert alert-success" style="margin-bottom: 2rem; font-size: 1rem; padding: 1rem 1.5rem;">
+        🚫 <strong>Absolute Rule:</strong> No money exchanges hands on Aapas — ever. This is a mutual aid platform, not a marketplace. Any attempt to charge for services will result in immediate removal.
+      </div>
+
+      <div class="guideline-section">
+        <h3><span>💰</span> The No-Money Rule</h3>
+        <ul class="guideline-list">
+          <li>Aapas is built on generosity, not commerce. Skills and resources are shared freely.</li>
+          <li>You may not request or offer cash, bank transfers, digital payments, or any form of monetary compensation.</li>
+          <li>Barter (swapping skills for skills) is fine and encouraged.</li>
+          <li>Accepting tips or gifts is at your own discretion, but never expected or advertised.</li>
+        </ul>
+      </div>
+
+      <div class="guideline-section">
+        <h3><span>🤝</span> How to Have a Good Exchange</h3>
+        <ul class="guideline-list">
+          <li>Be clear in your listing. Specific offers and requests get better responses.</li>
+          <li>Respond to messages promptly — community members are counting on you.</li>
+          <li>Agree on time, place, and scope before meeting. Put it in writing (chat message) to avoid misunderstanding.</li>
+          <li>Mark the exchange as complete once both parties are satisfied.</li>
+          <li>Leave an honest thumbs up (or don't) — feedback helps the whole community.</li>
+        </ul>
+      </div>
+
+      <div class="guideline-section">
+        <h3><span>🛡️</span> Safety Tips</h3>
+        <ul class="guideline-list">
+          <li>For your first exchange with someone new, meet in a public place.</li>
+          <li>For home visits, let a friend or family member know where you're going.</li>
+          <li>Trust your instincts. If something feels wrong, it's okay to cancel.</li>
+          <li>Never share sensitive personal information (ID number, bank details) with other members.</li>
+          <li>Report any safety concerns immediately using the Report an Issue page.</li>
+        </ul>
+      </div>
+
+      <div class="guideline-section">
+        <h3><span>🌟</span> Community Values</h3>
+        <ul class="guideline-list">
+          <li><strong>Mutual Aid:</strong> We help each other because community thrives when everyone contributes.</li>
+          <li><strong>Respect:</strong> Treat every member with dignity, regardless of background, skill level, or need.</li>
+          <li><strong>Reliability:</strong> Your word matters. If you commit, follow through.</li>
+          <li><strong>Inclusion:</strong> Aapas is for everyone in the community, regardless of age, gender, or ability.</li>
+          <li><strong>Generosity of spirit:</strong> The more you give, the stronger our network becomes.</li>
+        </ul>
+      </div>
+
+      <div class="guideline-section">
+        <h3><span>⚖️</span> Dispute Process</h3>
+        <ul class="guideline-list">
+          <li>Try to resolve disagreements directly and calmly with the other member first.</li>
+          <li>If that fails, submit a report using the Report an Issue page. Include as much detail as possible.</li>
+          <li>Admins review all reports within 48 hours. All reports are private.</li>
+          <li>Possible outcomes: warning issued, listing removed, badge revoked, or member suspended.</li>
+          <li>Admins' decisions are final. We aim to be fair and hear all sides.</li>
+        </ul>
+      </div>
+
+      <div class="guideline-section">
+        <h3><span>🏅</span> Trust Badges</h3>
+        <ul class="guideline-list">
+          <li><span class="badge badge-auto">5 Exchanges</span> — Automatically awarded after completing 5 exchanges.</li>
+          <li><span class="badge badge-auto">10 Exchanges</span> — Automatically awarded after completing 10 exchanges.</li>
+          <li><span class="badge badge-auto">Active Member</span> — Awarded when you have both an active offer and request posted.</li>
+          <li><span class="badge badge-manual">Verified Neighbour</span> — Manually assigned by admins after identity verification.</li>
+          <li><span class="badge badge-manual">Community Helper</span> — Manually assigned to exceptional contributors.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ LISTING DETAIL MODAL ══════════ -->
+<div class="modal-overlay" id="listing-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div id="modal-type-badge" style="margin-bottom: 8px;"></div>
+        <h2 id="modal-title"></h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('listing-modal')">✕</button>
+    </div>
+    <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
+      <span id="modal-cat" class="cat-tag"></span>
+      <span id="modal-area" class="cat-tag">📍</span>
+    </div>
+    <p id="modal-desc" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.25rem;"></p>
+    <p id="modal-avail" style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.5rem;"></p>
+    <hr class="divider">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem;">
+      <div class="avatar avatar-md" id="modal-avatar" style="background: var(--green);"></div>
+      <div>
+        <div style="font-weight: 600; font-size: 0.95rem;" id="modal-member-name"></div>
+        <div class="badges-wrap" id="modal-member-badges" style="margin-top: 4px;"></div>
+      </div>
+      <button class="btn btn-ghost" style="margin-left: auto; padding: 8px 16px;" onclick="viewProfile(currentListingMemberId)">View Profile</button>
+    </div>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <button class="btn btn-green" style="flex: 1;" onclick="connectWithMember()">🤝 Connect</button>
+      <button class="btn btn-gray" style="padding: 12px 16px;" onclick="openModal('report-connect-modal')" title="Report issue">🚩</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ LOGIN MODAL ══════════ -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Welcome Back</h2>
+      <button class="modal-close" onclick="closeModal('login-modal')">✕</button>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="login-email" placeholder="your@email.com">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="••••••••">
+    </div>
+    <button class="btn btn-green" style="width:100%; margin-bottom: 1rem;" onclick="doLogin()">Log In</button>
+    <p style="text-align:center; font-size:0.875rem; color: var(--text-muted);">
+      Don't have an account? <button onclick="closeModal('login-modal'); openModal('signup-modal')" style="background:none;border:none;color:var(--green);font-weight:600;cursor:pointer;font-family:inherit;">Sign Up Free</button>
+    </p>
+  </div>
+</div>
+
+<!-- ══════════ SIGNUP MODAL ══════════ -->
+<div class="modal-overlay" id="signup-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Join Aapas</h2>
+      <button class="modal-close" onclick="closeModal('signup-modal')">✕</button>
+    </div>
+    <div class="alert alert-warn" style="margin-bottom: 1.25rem;">🚫 Reminder: Aapas is a no-money platform. No charging or payments allowed.</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name *</label>
+        <input type="text" id="signup-fname" placeholder="Ali">
+      </div>
+      <div class="form-group">
+        <label>Last Name *</label>
+        <input type="text" id="signup-lname" placeholder="Khan">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email *</label>
+      <input type="email" id="signup-email" placeholder="your@email.com">
+    </div>
+    <div class="form-group">
+      <label>Password *</label>
+      <input type="password" id="signup-pass" placeholder="At least 8 characters">
+    </div>
+    <div class="form-group">
+      <label>Neighbourhood / Area *</label>
+      <input type="text" id="signup-area" placeholder="e.g. DHA Phase 4, Gulshan-e-Iqbal">
+    </div>
+    <div class="form-group">
+      <label>What can you offer? (optional)</label>
+      <input type="text" id="signup-offers" placeholder="e.g. Urdu tutoring, bicycle repair, garden tools">
+    </div>
+    <div class="form-group">
+      <label>What might you need? (optional)</label>
+      <input type="text" id="signup-needs" placeholder="e.g. Maths help, translation, occasional rides">
+    </div>
+    <button class="btn btn-green" style="width:100%; margin-bottom: 1rem;" onclick="doSignup()">Create Account</button>
+    <p style="text-align:center; font-size:0.875rem; color: var(--text-muted);">
+      Already a member? <button onclick="closeModal('signup-modal'); openModal('login-modal')" style="background:none;border:none;color:var(--green);font-weight:600;cursor:pointer;font-family:inherit;">Log In</button>
+    </p>
+  </div>
+</div>
+
+<!-- ══════════ CONNECT CONFIRM MODAL ══════════ -->
+<div class="modal-overlay" id="connect-modal">
+  <div class="modal" style="max-width: 420px;">
+    <div class="modal-header">
+      <h2>Connect Request Sent! 🎉</h2>
+      <button class="modal-close" onclick="closeModal('connect-modal')">✕</button>
+    </div>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Your connection request has been sent. When the other member responds, your exchange will appear in your dashboard.</p>
+    <div style="display: flex; gap: 10px;">
+      <button class="btn btn-ghost" style="flex:1;" onclick="closeModal('connect-modal')">Close</button>
+      <button class="btn btn-green" style="flex:1;" onclick="closeModal('connect-modal'); showPage('dashboard')">Go to Dashboard</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Aapas·</h4>
+        <p>A mutual aid network where community members share skills and resources — no money, just neighbourly generosity.</p>
+        <div class="no-money-badge">🚫 No money ever changes hands</div>
+      </div>
+      <div>
+        <h4>Browse</h4>
+        <a onclick="showPage('offers')">Browse Offers</a>
+        <a onclick="showPage('requests')">Browse Requests</a>
+        <a onclick="showPage('post')">Post a Listing</a>
+      </div>
+      <div>
+        <h4>Community</h4>
+        <a onclick="showPage('guidelines')">Guidelines & Safety</a>
+        <a onclick="showPage('report')">Report an Issue</a>
+        <a onclick="showPage('dashboard')">My Dashboard</a>
+      </div>
+      <div>
+        <h4>Account</h4>
+        <a onclick="openModal('signup-modal')">Join Free</a>
+        <a onclick="openModal('login-modal')">Log In</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Aapas Skills & Resource Exchange. A mutual aid community.</span>
+      <span>Made with ❤️ for the community</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════ JAVASCRIPT ══════════ ─────────────────────────────────────────── -->
+<script>
+// ── DATA ──────────────────────────────────────────────────────────
+const avatarColors = ['#1a7a5e','#2563a8','#7c3aed','#d4372a','#d4892a','#047857','#1e40af','#5b21b6'];
+const getColor = name => avatarColors[name.charCodeAt(0) % avatarColors.length];
+const initials = name => name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+
+const MEMBERS = [
+  { id: 1, name: 'Fatima Malik', area: 'DHA Phase 5', offers: 'English tutoring, Quran teaching, baking', needs: 'Garden help, computer repair', exchanges: 12, thumbs: 11, badges: ['10 Exchanges', 'Verified Neighbour', 'Community Helper'] },
+  { id: 2, name: 'Kamran Siddiqui', area: 'Gulshan-e-Iqbal', offers: 'Plumbing repairs, bicycle fixing, welding', needs: 'English conversation, maths tutoring', exchanges: 7, thumbs: 6, badges: ['5 Exchanges', 'Active Member'] },
+  { id: 3, name: 'Sara Ahmed', area: 'F-10, Islamabad', offers: 'French & Urdu translation, calligraphy lessons', needs: 'Cooking classes, sewing help', exchanges: 3, thumbs: 3, badges: ['Active Member'] },
+  { id: 4, name: 'Hassan Raza', area: 'DHA Phase 2', offers: 'Math & Physics tutoring, 3D printing, tech help', needs: 'Language exchange partner, car servicing', exchanges: 18, thumbs: 17, badges: ['10 Exchanges', 'Verified Neighbour'] },
+  { id: 5, name: 'Nadia Qureshi', area: 'Model Town', offers: 'Tailoring & sewing, embroidery, kurti designs', needs: 'Maths help for kids, plumber', exchanges: 5, thumbs: 5, badges: ['5 Exchanges'] },
+  { id: 6, name: 'Bilal Chaudhry', area: 'Bahria Town', offers: 'Car rides for medical appointments, grocery runs', needs: 'English grammar lessons, home electrical work', exchanges: 9, thumbs: 8, badges: ['5 Exchanges', 'Active Member'] },
+  { id: 7, name: 'Ayesha Tariq', area: 'Johar Town', offers: 'Home-cooked meals (Pakistani cuisine), recipe sharing', needs: 'Computer lessons, furniture assembly help', exchanges: 2, thumbs: 2, badges: [] },
+  { id: 8, name: 'Omar Farooq', area: 'PECHS', offers: 'Electrician work (lights, switches, fans), handyman', needs: 'Tutoring for A-levels, car lift to airport', exchanges: 14, thumbs: 13, badges: ['10 Exchanges', 'Community Helper'] },
+];
+
+const LISTINGS = [
+  { id: 1, type: 'offer', cat: 'Tutoring', title: 'O-Level Mathematics & Physics Tutoring', desc: 'Experienced BSc Physics graduate. Can help O-level and Matric students with Maths and Physics. Happy to do 1-on-1 or small groups.', avail: 'Weekends and weekday evenings after 5pm', area: 'DHA Phase 2', memberId: 4, date: '2025-01-10' },
+  { id: 2, type: 'offer', cat: 'Tools', title: 'Lend: Power Drill & Basic Tool Set', desc: 'Have a good-quality Bosch drill and assorted bits, hammer, screwdrivers, etc. Can lend for up to 3 days.', avail: 'Weekends only, collect and return yourself', area: 'Bahria Town', memberId: 6, date: '2025-01-09' },
+  { id: 3, type: 'request', cat: 'Repair', title: 'Need Help Fixing a Leaky Kitchen Sink', desc: 'The pipe under my kitchen sink has been dripping for two weeks. Need someone who knows basic plumbing. All materials provided.', avail: 'Any morning works', area: 'Model Town', memberId: 5, date: '2025-01-11' },
+  { id: 4, type: 'offer', cat: 'Language', title: 'French & Urdu ↔ English Translation', desc: 'Fluent in French, Urdu, and English. Can help with document translation, letters, job applications, or just casual conversation practice.', avail: 'Flexible — can do online or in person', area: 'F-10, Islamabad', memberId: 3, date: '2025-01-08' },
+  { id: 5, type: 'request', cat: 'Tutoring', title: 'Looking for English Conversation Partner', desc: 'My English reading is decent but I need practice speaking. Looking for someone patient to have conversations with, maybe once or twice a week.', avail: 'Evenings on weekdays', area: 'Gulshan-e-Iqbal', memberId: 2, date: '2025-01-12' },
+  { id: 6, type: 'offer', cat: 'Language', title: 'English Tutoring — Primary & Middle School', desc: 'Experienced English teacher (10+ years). Can help with grammar, comprehension, essay writing, and spoken English for kids and adults.', avail: 'Mon–Thu afternoons, Saturday morning', area: 'DHA Phase 5', memberId: 1, date: '2025-01-07' },
+  { id: 7, type: 'offer', cat: 'Repair', title: 'Electrician Help: Lights, Fans, Sockets', desc: 'Can fix ceiling fans, install lights, replace power sockets, check wiring. Basic electrical work only. Please ensure supply is switched off before I arrive.', avail: 'Weekends and Friday evenings', area: 'PECHS', memberId: 8, date: '2025-01-06' },
+  { id: 8, type: 'request', cat: 'Rides', title: 'Need Occasional Ride to Agha Khan Hospital', desc: 'My mother has fortnightly check-ups at AKH and I don\'t drive. Would really appreciate a lift — happy to share petrol costs in kind (home-cooked food!).', avail: 'Usually Tuesday mornings, 8–10am', area: 'Johar Town', memberId: 7, date: '2025-01-10' },
+  { id: 9, type: 'offer', cat: 'Other', title: 'Home-Cooked Pakistani Meals for Busy Families', desc: 'Single mum with grown kids who loves to cook. Can prepare extra portions of traditional Pakistani food for neighbours in need — daal, sabzi, biryani.', avail: 'Twice a week, coordinate in advance', area: 'Johar Town', memberId: 7, date: '2025-01-05' },
+  { id: 10, type: 'request', cat: 'Repair', title: 'Help Assembling IKEA-Style Furniture', desc: 'Bought a new wardrobe and bookshelf and the instructions are impossible. Looking for someone handy who can help put them together. Tea and snacks provided!', avail: 'Any weekend', area: 'DHA Phase 5', memberId: 1, date: '2025-01-13' },
+  { id: 11, type: 'offer', cat: 'Tools', title: 'Lend: Pressure Washer for Courtyards', desc: 'High-pressure washer great for cleaning driveways, courtyards, or cars. Can lend for a day. Fuel provided by borrower.', avail: 'Weekends only', area: 'Bahria Town', memberId: 6, date: '2025-01-04' },
+  { id: 12, type: 'request', cat: 'Other', title: 'Seeking Computer Basics Lessons', desc: 'I am 58 years old and want to learn how to use a laptop, WhatsApp properly, and video calls. My grandchildren live abroad and I want to be able to talk to them.', avail: 'Any day, I am retired', area: 'PECHS', memberId: 8, date: '2025-01-14' },
+];
+
+const EXCHANGES = [
+  { id: 1, listing: 1, listingTitle: 'O-Level Math Tutoring', withMember: 'Kamran Siddiqui', status: 'completed', date: '2025-01-08', rating: 'thumbsup', myRole: 'received' },
+  { id: 2, listing: 6, listingTitle: 'English Tutoring', withMember: 'Ayesha Tariq', status: 'in-progress', date: '2025-01-11', rating: null, myRole: 'offered' },
+  { id: 3, listing: 2, listingTitle: 'Power Drill Lending', withMember: 'Bilal Chaudhry', status: 'completed', date: '2025-01-05', rating: 'thumbsup', myRole: 'offered' },
+];
+
+// ── STATE ─────────────────────────────────────────────────────────
+let currentUser = null;
+let currentListingMemberId = null;
+let offersFilter = { cat: '', search: '' };
+let requestsFilter = { cat: '', search: '' };
+let postType = 'offer';
+const API_BASE = 'http://127.0.0.1:5000';
+
+async function persistFormData(endpoint, payload) {
+  try {
+    const response = await fetch(API_BASE + endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) {
+      return false;
+    }
+    const result = await response.json();
+    return !!result.ok;
+  } catch (err) {
+    return false;
+  }
+}
+
+// ── ROUTING ───────────────────────────────────────────────────────
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  const map = { home: 0, offers: 0, requests: 1, post: 2, guidelines: 3 };
+  const links = document.querySelectorAll('.nav-link');
+  if (name === 'home') {} // no nav highlight
+  if (name === 'offers') links[0] && links[0].classList.add('active');
+  if (name === 'requests') links[1] && links[1].classList.add('active');
+  if (name === 'post') links[2] && links[2].classList.add('active');
+  if (name === 'guidelines') links[3] && links[3].classList.add('active');
+  window.scrollTo(0, 0);
+  if (name === 'offers') renderListings('offers');
+  if (name === 'requests') renderListings('requests');
+  if (name === 'home') renderHomeListings();
+  if (name === 'dashboard') renderDashboard();
+  if (name === 'post') checkPostAuth();
+}
+
+// ── RENDER LISTINGS ───────────────────────────────────────────────
+function catClass(cat) {
+  const m = { Repair: 'cat-repair', Tutoring: 'cat-tutoring', Language: 'cat-language', Tools: 'cat-tools', Rides: 'cat-rides', Other: 'cat-other' };
+  return m[cat] || 'cat-other';
+}
+
+function catEmoji(cat) {
+  const m = { Repair: '🔧', Tutoring: '📚', Language: '🗣️', Tools: '🪚', Rides: '🚗', Other: '✨' };
+  return m[cat] || '✨';
+}
+
+function renderBadges(badges) {
+  return badges.map(b => {
+    const cls = ['Verified Neighbour','Community Helper'].includes(b) ? 'badge-manual' : 'badge-auto';
+    return `<span class="badge ${cls}">${b}</span>`;
+  }).join('');
+}
+
+function listingCard(l) {
+  const member = MEMBERS.find(m => m.id === l.memberId) || {};
+  const typeCls = l.type === 'offer' ? 'type-offer' : 'type-request';
+  const typeLabel = l.type === 'offer' ? '🌱 Offer' : '🙏 Request';
+  return `<div class="listing-card" onclick="openListing(${l.id})">
+    <span class="type-badge ${typeCls}">${typeLabel}</span>
+    <h3>${l.title}</h3>
+    <p>${l.desc.length > 100 ? l.desc.slice(0, 100) + '…' : l.desc}</p>
+    <div class="listing-meta">
+      <span class="cat-tag ${catClass(l.cat)}">${catEmoji(l.cat)} ${l.cat}</span>
+      ${l.area ? `<span class="cat-tag">📍 ${l.area}</span>` : ''}
+      <div class="member-mini">
+        <div class="avatar-xs avatar" style="background:${getColor(member.name||'A')}">${initials(member.name||'?')}</div>
+        <span>${member.name || 'Unknown'}</span>
+        ${member.badges && member.badges.length ? '<span style="font-size:0.7rem;">🏅</span>' : ''}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderListings(type) {
+  const filter = type === 'offers' ? offersFilter : requestsFilter;
+  const t = type === 'offers' ? 'offer' : 'request';
+  let items = LISTINGS.filter(l => l.type === t);
+  if (filter.cat) items = items.filter(l => l.cat === filter.cat);
+  if (filter.search) items = items.filter(l =>
+    l.title.toLowerCase().includes(filter.search) ||
+    l.desc.toLowerCase().includes(filter.search)
+  );
+  const grid = document.getElementById(type + '-grid');
+  const empty = document.getElementById(type + '-empty');
+  if (items.length === 0) { grid.innerHTML = ''; empty.style.display = 'block'; }
+  else { empty.style.display = 'none'; grid.innerHTML = items.map(listingCard).join(''); }
+}
+
+function renderHomeListings() {
+  const items = LISTINGS.slice(0, 6);
+  document.getElementById('home-listings').innerHTML = items.map(listingCard).join('');
+}
+
+function filterListings(type) {
+  const val = document.getElementById(type + '-search').value.toLowerCase();
+  if (type === 'offers') offersFilter.search = val;
+  else requestsFilter.search = val;
+  renderListings(type);
+}
+
+function setCatFilter(type, cat, btn) {
+  const container = btn.closest('.filter-bar');
+  container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (type === 'offers') offersFilter.cat = cat;
+  else requestsFilter.cat = cat;
+  renderListings(type);
+}
+
+// ── LISTING MODAL ─────────────────────────────────────────────────
+function openListing(id) {
+  const l = LISTINGS.find(l => l.id === id);
+  const member = MEMBERS.find(m => m.id === l.memberId) || {};
+  currentListingMemberId = l.memberId;
+  const typeCls = l.type === 'offer' ? 'type-offer' : 'type-request';
+  const typeLabel = l.type === 'offer' ? '🌱 Offer' : '🙏 Request';
+  document.getElementById('modal-type-badge').innerHTML = `<span class="type-badge ${typeCls}">${typeLabel}</span>`;
+  document.getElementById('modal-title').textContent = l.title;
+  document.getElementById('modal-cat').textContent = catEmoji(l.cat) + ' ' + l.cat;
+  document.getElementById('modal-cat').className = 'cat-tag ' + catClass(l.cat);
+  document.getElementById('modal-area').textContent = '📍 ' + (l.area || 'Location not specified');
+  document.getElementById('modal-desc').textContent = l.desc;
+  document.getElementById('modal-avail').textContent = l.avail ? '🕐 ' + l.avail : '';
+  const av = document.getElementById('modal-avatar');
+  av.style.background = getColor(member.name || 'A');
+  av.textContent = initials(member.name || '?');
+  document.getElementById('modal-member-name').textContent = member.name || 'Unknown';
+  document.getElementById('modal-member-badges').innerHTML = renderBadges(member.badges || []);
+  openModal('listing-modal');
+}
+
+function connectWithMember() {
+  if (!currentUser) { closeModal('listing-modal'); openModal('login-modal'); return; }
+  closeModal('listing-modal');
+  openModal('connect-modal');
+}
+
+function viewProfile(memberId) {
+  closeModal('listing-modal');
+  const member = MEMBERS.find(m => m.id === memberId);
+  if (!member) return;
+  document.getElementById('profile-name').textContent = member.name;
+  document.getElementById('profile-area').textContent = '📍 ' + member.area;
+  const av = document.getElementById('profile-avatar');
+  av.style.background = getColor(member.name);
+  av.textContent = initials(member.name);
+  document.getElementById('profile-count').textContent = member.exchanges;
+  document.getElementById('profile-thumbs').textContent = member.thumbs;
+  document.getElementById('profile-badges').innerHTML = renderBadges(member.badges);
+  document.getElementById('profile-offers-text').textContent = member.offers || 'Nothing listed yet.';
+  document.getElementById('profile-needs-text').textContent = member.needs || 'Nothing listed yet.';
+  const listings = LISTINGS.filter(l => l.memberId === memberId);
+  document.getElementById('profile-listings').innerHTML = listings.length
+    ? listings.map(l => `<div onclick="openListing(${l.id})" style="padding: 10px; border: 1px solid var(--border); border-radius: 8px; cursor:pointer; margin-bottom: 8px; transition: background 0.2s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">
+        <span class="type-badge ${l.type==='offer'?'type-offer':'type-request'}" style="font-size:0.7rem; padding: 2px 8px; margin-right:6px;">${l.type==='offer'?'🌱 Offer':'🙏 Request'}</span>
+        <span style="font-size:0.875rem; font-weight:500;">${l.title}</span>
+      </div>`).join('')
+    : '<p style="color: var(--text-muted); font-size: 0.875rem;">No listings yet.</p>';
+  showPage('profile');
+}
+
+// ── POST ──────────────────────────────────────────────────────────
+function setPostType(type) {
+  postType = type;
+  const offerBtn = document.getElementById('toggle-offer');
+  const requestBtn = document.getElementById('toggle-request');
+  offerBtn.className = 'type-toggle-btn' + (type === 'offer' ? ' active-offer' : '');
+  requestBtn.className = 'type-toggle-btn' + (type === 'request' ? ' active-request' : '');
+}
+
+function checkPostAuth() {
+  const prompt = document.getElementById('post-login-prompt');
+  const form = document.getElementById('post-form-wrap');
+  if (!currentUser) { prompt.style.display = 'flex'; form.style.display = 'none'; }
+  else { prompt.style.display = 'none'; form.style.display = 'block'; }
+}
+
+async function submitPost() {
+  if (!currentUser) { openModal('login-modal'); return; }
+  const title = document.getElementById('post-title').value.trim();
+  const cat = document.getElementById('post-category').value;
+  const desc = document.getElementById('post-desc').value.trim();
+  const availability = document.getElementById('post-avail').value;
+  const area = document.getElementById('post-area').value || currentUser.area;
+  if (!title || !cat || !desc) { showToast('Please fill in the required fields', 'error'); return; }
+  const newListing = {
+    id: LISTINGS.length + 1,
+    type: postType,
+    cat, title, desc,
+    avail: availability,
+    area,
+    memberId: currentUser.id,
+    date: new Date().toISOString().split('T')[0]
+  };
+  const saved = await persistFormData('/api/save-post', {
+    user_name: currentUser.name,
+    type: postType,
+    category: cat,
+    title,
+    description: desc,
+    area,
+    availability
+  });
+  LISTINGS.unshift(newListing);
+  document.getElementById('post-title').value = '';
+  document.getElementById('post-desc').value = '';
+  document.getElementById('post-avail').value = '';
+  document.getElementById('post-category').value = '';
+  updateStats();
+  if (!saved) {
+    showToast('Post created, but Excel sync failed. Ensure backend is running.', 'error');
+  }
+  showToast('Listing posted successfully! 🎉', 'success');
+  setTimeout(() => showPage(postType === 'offer' ? 'offers' : 'requests'), 800);
+}
+
+// ── AUTH ──────────────────────────────────────────────────────────
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  if (!email || !pass) { showToast('Please fill in all fields', 'error'); return; }
+  const saved = await persistFormData('/api/save-login', {
+    email,
+    login_status: 'success'
+  });
+  // Simulate login with demo user
+  currentUser = { id: 99, name: email.split('@')[0].replace(/[^a-zA-Z ]/g, ' '), email, area: 'Your Area', offers: '', needs: '', exchanges: 0, thumbs: 0, badges: [] };
+  // Try to match existing member by name pattern
+  const matchedMember = MEMBERS.find(m => m.id === 1); // demo: always log in as Fatima
+  if (matchedMember) {
+    currentUser = { ...matchedMember };
+  }
+  updateNav();
+  closeModal('login-modal');
+  if (!saved) {
+    showToast('Logged in, but Excel sync failed. Ensure backend is running.', 'error');
+  }
+  showToast('Welcome back, ' + currentUser.name.split(' ')[0] + '! 👋', 'success');
+}
+
+async function doSignup() {
+  const fname = document.getElementById('signup-fname').value.trim();
+  const lname = document.getElementById('signup-lname').value.trim();
+  const email = document.getElementById('signup-email').value.trim();
+  const pass = document.getElementById('signup-pass').value;
+  const area = document.getElementById('signup-area').value.trim();
+  const offers = document.getElementById('signup-offers').value;
+  const needs = document.getElementById('signup-needs').value;
+  if (!fname || !lname || !email || !pass || !area) { showToast('Please fill in all required fields', 'error'); return; }
+  const saved = await persistFormData('/api/save-signup', {
+    first_name: fname,
+    last_name: lname,
+    email,
+    area,
+    offers,
+    needs
+  });
+  const newMember = {
+    id: MEMBERS.length + 1,
+    name: fname + ' ' + lname,
+    email, area,
+    offers,
+    needs,
+    exchanges: 0, thumbs: 0, badges: []
+  };
+  MEMBERS.push(newMember);
+  currentUser = newMember;
+  updateNav();
+  updateStats();
+  closeModal('signup-modal');
+  if (!saved) {
+    showToast('Signup completed, but Excel sync failed. Ensure backend is running.', 'error');
+  }
+  showToast('Welcome to Aapas, ' + fname + '! 🌱', 'success');
+}
+
+function doLogout() {
+  currentUser = null;
+  updateNav();
+  showPage('home');
+  showToast('Logged out. See you soon!');
+}
+
+function updateNav() {
+  const nav = document.getElementById('nav-actions');
+  if (currentUser) {
+    nav.innerHTML = `
+      <button class="btn-sm btn-outline" onclick="showPage('dashboard')">📊 Dashboard</button>
+      <div style="display:flex; align-items:center; gap: 8px; cursor:pointer;" onclick="showPage('dashboard')">
+        <div class="avatar avatar-sm" style="background:${getColor(currentUser.name)}">${initials(currentUser.name)}</div>
+        <span style="font-size:0.875rem; font-weight:500;">${currentUser.name.split(' ')[0]}</span>
+      </div>
+      <button class="btn-sm btn-outline" onclick="doLogout()">Log Out</button>`;
+  } else {
+    nav.innerHTML = `
+      <button class="btn-sm btn-outline" onclick="openModal('login-modal')">Log In</button>
+      <button class="btn-sm btn-primary" onclick="openModal('signup-modal')">Join Free</button>`;
+  }
+}
+
+// ── DASHBOARD ─────────────────────────────────────────────────────
+function renderDashboard() {
+  const noLogin = document.getElementById('dash-no-login');
+  const content = document.getElementById('dash-content');
+  if (!currentUser) { noLogin.style.display = 'block'; content.style.display = 'none'; return; }
+  noLogin.style.display = 'none'; content.style.display = 'block';
+  document.getElementById('dash-welcome').textContent = 'Welcome back, ' + currentUser.name + '!';
+  document.getElementById('dash-count').textContent = currentUser.exchanges;
+  document.getElementById('dash-thumbs').textContent = currentUser.thumbs;
+  const myListings = LISTINGS.filter(l => l.memberId === currentUser.id);
+  document.getElementById('dash-listings-count').textContent = myListings.filter(l => !l.completed).length;
+  document.getElementById('dash-badges-count').textContent = currentUser.badges.length;
+  document.getElementById('dash-badges').innerHTML = currentUser.badges.length
+    ? renderBadges(currentUser.badges)
+    : '<span style="color:var(--text-muted); font-size:0.875rem;">No badges yet. Complete exchanges to earn them!</span>';
+
+  // My listings
+  const listEl = document.getElementById('dash-listings-list');
+  if (myListings.length === 0) {
+    listEl.innerHTML = `<div style="text-align:center; padding: 2rem; color: var(--text-muted);">
+      <p style="margin-bottom:1rem;">You haven't posted any listings yet.</p>
+      <button class="btn btn-green" onclick="showPage('post')">Post Your First Listing</button>
+    </div>`;
+  } else {
+    listEl.innerHTML = myListings.map(l => `
+      <div class="exchange-item">
+        <div style="flex:1;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+            <span class="type-badge ${l.type==='offer'?'type-offer':'type-request'}" style="font-size:0.75rem;">${l.type==='offer'?'🌱':'🙏'} ${l.type}</span>
+            <span class="status-pill ${l.completed ? 'status-completed' : 'status-active'}">${l.completed ? 'completed' : 'active'}</span>
+          </div>
+          <h4 style="font-size:0.9rem; font-weight:600; margin-bottom:3px;">${l.title}</h4>
+          <p style="font-size:0.8rem; color:var(--text-muted);">📍 ${l.area || 'No area'} · ${catEmoji(l.cat)} ${l.cat}</p>
+        </div>
+        <div style="display:flex; gap:6px; flex-shrink:0;">
+          ${!l.completed ? `<button class="btn btn-gray" style="padding:6px 12px; font-size:0.8rem;" onclick="editListingStatus(${l.id})">✏️ Edit</button>
+          <button class="btn btn-green" style="padding:6px 12px; font-size:0.8rem;" onclick="markListingComplete(${l.id})">✓ Done</button>` : '<span style="color:var(--text-light); font-size:0.8rem;">Completed</span>'}
+        </div>
+      </div>`).join('');
+  }
+
+  // My exchanges
+  const exchEl = document.getElementById('dash-exchanges-list');
+  if (EXCHANGES.length === 0) {
+    exchEl.innerHTML = '<p style="text-align:center; padding:2rem; color:var(--text-muted);">No exchanges yet. Browse listings and connect with members!</p>';
+  } else {
+    exchEl.innerHTML = EXCHANGES.map(ex => `
+      <div class="exchange-item">
+        <div style="flex:1;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+            <span class="status-pill ${ex.status==='completed'?'status-completed':ex.status==='in-progress'?'status-active':'status-pending'}">${ex.status}</span>
+          </div>
+          <h4 style="font-size:0.9rem; font-weight:600; margin-bottom:3px;">${ex.listingTitle}</h4>
+          <p style="font-size:0.8rem; color:var(--text-muted);">With ${ex.withMember} · ${ex.date}</p>
+        </div>
+        ${ex.status === 'in-progress' ? `<button class="btn btn-green" style="padding:8px 14px; font-size:0.82rem; flex-shrink:0;" onclick="markExchangeDone(${ex.id})">✓ Mark Complete</button>` : ''}
+        ${ex.status === 'completed' && !ex.rating ? `<div style="display:flex; gap:6px; flex-shrink:0;">
+          <button class="thumb-btn" onclick="rateExchange(${ex.id},'thumbsup',this)" title="Thumbs up">👍</button>
+          <button class="thumb-btn" onclick="rateExchange(${ex.id},'neutral',this)" title="Neutral">😐</button>
+        </div>` : ''}
+        ${ex.rating === 'thumbsup' ? '<span style="font-size:1.2rem; flex-shrink:0;">👍</span>' : ''}
+      </div>`).join('');
+  }
+}
+
+function switchDashTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('dash-tab-listings').style.display = tab === 'listings' ? 'block' : 'none';
+  document.getElementById('dash-tab-exchanges').style.display = tab === 'exchanges' ? 'block' : 'none';
+}
+
+function markListingComplete(id) {
+  const l = LISTINGS.find(li => li.id === id);
+  if (l) { l.completed = true; l.status = 'completed'; }
+  renderDashboard();
+  showToast('Listing marked as completed!', 'success');
+}
+
+function editListingStatus(id) {
+  showToast('Edit feature: in a full version this opens an edit form.');
+}
+
+function markExchangeDone(id) {
+  const ex = EXCHANGES.find(e => e.id === id);
+  if (ex) {
+    ex.status = 'completed';
+    if (currentUser) currentUser.exchanges++;
+    checkBadges();
+  }
+  renderDashboard();
+  updateNav();
+  showToast('Exchange marked as complete! 🎉', 'success');
+}
+
+function rateExchange(id, rating, btn) {
+  const ex = EXCHANGES.find(e => e.id === id);
+  if (ex) {
+    ex.rating = rating;
+    if (rating === 'thumbsup' && currentUser) currentUser.thumbs++;
+  }
+  btn.closest('div').innerHTML = '<span style="font-size:1.2rem;">' + (rating === 'thumbsup' ? '👍' : '😐') + ' Rated</span>';
+  showToast('Feedback saved. Thank you!', 'success');
+}
+
+function checkBadges() {
+  if (!currentUser) return;
+  const count = currentUser.exchanges;
+  if (count >= 5 && !currentUser.badges.includes('5 Exchanges')) {
+    currentUser.badges.push('5 Exchanges');
+    showToast('🏅 Badge unlocked: 5 Exchanges!', 'success');
+  }
+  if (count >= 10 && !currentUser.badges.includes('10 Exchanges')) {
+    currentUser.badges.push('10 Exchanges');
+    showToast('🏅 Badge unlocked: 10 Exchanges!', 'success');
+  }
+}
+
+// ── REPORT ────────────────────────────────────────────────────────
+async function submitReport() {
+  const name = document.getElementById('report-name').value.trim();
+  const email = document.getElementById('report-email').value.trim();
+  const member = document.getElementById('report-member').value.trim();
+  const listingRef = document.getElementById('report-listing').value.trim();
+  const type = document.getElementById('report-type').value;
+  const desc = document.getElementById('report-desc').value.trim();
+  const incidentDate = document.getElementById('report-date').value;
+  if (!name || !email || !type || !desc) { showToast('Please fill in all required fields', 'error'); return; }
+  const saved = await persistFormData('/api/save-report', {
+    reporter_name: name,
+    reporter_email: email,
+    member,
+    listing_ref: listingRef,
+    report_type: type,
+    description: desc,
+    incident_date: incidentDate
+  });
+  if (!saved) {
+    showToast('Report submitted, but Excel sync failed. Ensure backend is running.', 'error');
+  }
+  document.getElementById('report-form').style.display = 'none';
+  document.getElementById('report-success').style.display = 'block';
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('modal-overlay')) {
+    e.target.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+
+// ── TOAST ─────────────────────────────────────────────────────────
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type ? ' ' + type : '');
+  setTimeout(() => { t.className = 'toast'; }, 3500);
+}
+
+// ── STATS ─────────────────────────────────────────────────────────
+function updateStats() {
+  const memberCount = MEMBERS.length;
+  const listingCount = LISTINGS.filter(l => !l.completed).length;
+  document.getElementById('stat-members').textContent = memberCount;
+  document.getElementById('stat-listings').textContent = listingCount;
+}
+
+// ── INIT ──────────────────────────────────────────────────────────
+renderHomeListings();
+updateStats();
+</script>
+</body>
+</html>
