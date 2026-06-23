@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -692,6 +692,7 @@ footer a:hover { color: white; }
 
 <!-- ══════════ MEMBER PROFILES ══════════ -->
 <div class="page" id="page-profile">
+  <div style="padding: 1rem 0 0 1rem;"><button class="btn btn-ghost" onclick="showPage('offers')" style="font-size:0.9rem;">&larr; Back to Listings</button></div>
   <div class="profile-header" id="profile-header-bg"></div>
   <div class="section" style="padding-top: 1rem;">
     <div class="container">
@@ -1339,23 +1340,24 @@ async function doLogin() {
   const email = document.getElementById('login-email').value.trim();
   const pass = document.getElementById('login-pass').value;
   if (!email || !pass) { showToast('Please fill in all fields', 'error'); return; }
+  if (pass.length < 4) { showToast('Password must be at least 4 characters', 'error'); return; }
   const saved = await persistFormData('/api/save-login', {
     email,
     login_status: 'success'
   });
-  // Simulate login with demo user
-  currentUser = { id: 99, name: email.split('@')[0].replace(/[^a-zA-Z ]/g, ' '), email, area: 'Your Area', offers: '', needs: '', exchanges: 0, thumbs: 0, badges: [] };
-  // Try to match existing member by name pattern
-  const matchedMember = MEMBERS.find(m => m.id === 1); // demo: always log in as Fatima
+  const userName = email.split('@')[0].replace(/[^a-zA-Z ]/g, ' ').trim() || 'User';
+  const matchedMember = MEMBERS.find(m => m.name.toLowerCase().includes(userName.toLowerCase()));
   if (matchedMember) {
     currentUser = { ...matchedMember };
+  } else {
+    currentUser = { id: MEMBERS.length + 1, name: userName, email, area: 'Your Area', offers: '', needs: '', exchanges: 0, thumbs: 0, badges: [] };
   }
   updateNav();
   closeModal('login-modal');
   if (!saved) {
     showToast('Logged in, but Excel sync failed. Ensure backend is running.', 'error');
   }
-  showToast('Welcome back, ' + currentUser.name.split(' ')[0] + '! 👋', 'success');
+  showToast('Welcome back, ' + currentUser.name.split(' ')[0] + '!', 'success');
 }
 
 async function doSignup() {
